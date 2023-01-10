@@ -1,0 +1,3 @@
+{"guest_ID": 1569872, "name": "Milos", "surname": "Mirkovic", "days_to_stay": 5, "card_number": "114523658794", "loyalty_status": "**", "room_assigned": 2}
+{"guest_ID": 1569873, "name": "Dusan", "surname": "Dusanovic", "days_to_stay": 8, "card_number": "124823758794", "loyalty_status": "*", "room_assigned": 3}
+{"guest_ID": 1569874, "name": "Filip", "surname": "Filipovic", "days_to_stay": 10, "card_number": "143623658987", "loyalty_status": "***", "room_assigned": 6}

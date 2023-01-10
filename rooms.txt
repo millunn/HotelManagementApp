@@ -1,0 +1,9 @@
+{"room_ID":1, "type":"single_bed","price":1000}
+{"room_ID":2, "type":"single_bed_deluxe","price":1500}
+{"room_ID":3, "type":"double_room","price":2000}
+{"room_ID":4, "type":"double_room_deluxe","price":2500}
+{"room_ID":5, "type":"three_bed_room","price":3000}
+{"room_ID":6, "type":"three_bed_room_deluxe","price":3500}
+{"room_ID":7, "type":"apartment_junior","price":4000}
+{"room_ID":8, "type":"apartment_suite","price":4500}
+{"room_ID":9, "type":"presidential_suite","price":5000}
