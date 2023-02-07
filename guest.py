@@ -1,5 +1,6 @@
 """Model for describing guest"""
 import json
+from datetime import datetime
 
 class Guest:
     """ Model for guest """
@@ -11,6 +12,7 @@ class Guest:
         self.__card_number = card_number
         self.loyalty_status = loyalty_status
         self.room_assigned = room_assigned
+        self.check_in_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
     def __str__(self):
         return f"Name_surname: {self.name} {self.surname}\nStaying days: {self.days_to_stay}\nLoyalty status: {self.loyalty_status}\nRoom assigned: {self.room_assigned}"

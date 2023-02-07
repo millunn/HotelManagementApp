@@ -311,12 +311,12 @@ class Hotel:
                                     amount += self.gym_membership
                                 if item in self.room_service:
                                     amount += self.room_service[item]
-                            self.invoice = f"\n-------INVOICE----------\n\nRoom number: {room_ID}\n\nCheck in date: {date.today() - timedelta(days = guest.days_to_stay)}\n\n" \
+                            self.invoice = f"\n-------INVOICE----------\n\nRoom number: {room_ID}\n\nCheck in date: {guest.check_in_date}\n\n" \
                                            f"Room type: {room.type}\n\nDays: {guest.days_to_stay}\n\nAmount: {round(amount,2)} RSD\n\n" \
                                            f"Issued by: {self.registered_employee.name} {self.registered_employee.surname}\n\nDiscount: {round((1-guest_loyalty_status)*100)} %\n\n" \
                                            f"Additional charges: {room.additional_charges}\n\nDate of issue: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n------------------------\n"
                         else:
-                            self.invoice = f"\n--------INVOICE---------\n\nRoom number: {room_ID}\n\nCheck in date: {date.today() - timedelta(days = guest.days_to_stay)}\n\n" \
+                            self.invoice = f"\n--------INVOICE---------\n\nRoom number: {room_ID}\n\nCheck in date: {guest.check_in_date}\n\n" \
                                            f"Room type: {room.type}\n\nDays: {guest.days_to_stay}\n\nAmount: {amount} RSD\n\nDiscount: {round((1-guest_loyalty_status)*100)} %\n\n" \
                                            f"Issued by: {self.registered_employee.name} {self.registered_employee.surname}\n\nDate of issue: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n------------------------\n"
                         self.save_invoice_as_txt()
@@ -438,9 +438,14 @@ class Hotel:
         context = ssl.create_default_context()
 
         with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
-            smtp.login(email_sender, email_password)
-            smtp.sendmail(email_sender, email_receiver, em.as_string())
+            try:
+                smtp.login(email_sender, email_password)
+                smtp.sendmail(email_sender, email_receiver, em.as_string())
+            except Exception as e:
+                print(f"\n\nSending failed!\n\n{str(e)}\n\n")
+                return False
         print("You've successfully sent an email!")
+        return True
 
     def send_forgotten_password(self) -> None:
         """ Sends employee's password to a mail if forgotten """
@@ -450,8 +455,8 @@ class Hotel:
             if question.lower() == 'y':
                 emp_ID = employee_ID()
                 mail = input("Enter a mail where you want to receive forgotten password: ")
-                self.get_forgotten_password(mail = mail, ID = emp_ID)
-                return
+                if self.get_forgotten_password(mail = mail, ID = emp_ID):
+                    return True
             elif question.lower() == 'n':
                 return
             else:

@@ -134,5 +134,3 @@ pick one thing and then tap enter""")
                 else:
                     print("Must be a 'yes' or 'no'")
                     pick_again = input("Want something more? ('yes' or 'no') ")
-
-
